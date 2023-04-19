@@ -7,6 +7,7 @@ import com.example.medical.clinic.domain.dto.AppointmentDTO;
 import com.example.medical.clinic.domain.dto.MessageDTO;
 import com.example.medical.clinic.domain.enums.AppointmentStatusEnum;
 import com.example.medical.clinic.domain.enums.RoleEnum;
+import com.example.medical.clinic.exception.MedicalClinicException;
 import com.example.medical.clinic.repository.*;
 import com.example.medical.clinic.service.ManagementService;
 import com.example.medical.clinic.utils.Formatters;
@@ -56,14 +57,16 @@ public class ManagementServiceImpl implements ManagementService {
     }
 
     @Override
-    public MessageDTO deleteAppointment(final Long id) {
-        appointmentRepository.deleteById(id);
+    public MessageDTO deleteAppointment(final Long id, final Long userId) {
+        var pacient = userRepository.findById(userId);
+        var appointment = appointmentRepository.findAppointmentByIdAndPacient(id,pacient.get());
+        appointmentRepository.delete(appointment);
         return MessageDTO.of("Appointment with id " + id + " has been deleted");
     }
 
     @Override
     public List<AppointmentDTO> getUserAppointments(final Long userId) {
-        User user = userRepository.findById(userId).orElseThrow( () -> new RuntimeException("User not found"));
+        User user = userRepository.findById(userId).orElseThrow( () -> new MedicalClinicException("User not found",400));
         if(RoleEnum.MEDIC.getDescription().equals(user.getRole().getDescription())) {
             return appointmentRepository.findAppointmentsByMedic(user)
                     .stream()
@@ -78,30 +81,30 @@ public class ManagementServiceImpl implements ManagementService {
 
     private Appointment findAppointment(final Long id) {
         return appointmentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Appointment could not be found"));
+                .orElseThrow(() -> new MedicalClinicException("Appointment could not be found",400));
     }
 
     private Clinic find(final Long id) {
         return clinicRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Missing clinic."));
+                .orElseThrow(() -> new MedicalClinicException("Missing clinic.",400));
     }
 
     private AppointmentStatus find(final AppointmentStatusEnum status) {
         return appointmentStatusRepository
                 .findByDescription(status.getDescription())
-                .orElseThrow(() -> new RuntimeException("Could not find pacient."));
+                .orElseThrow(() -> new MedicalClinicException("Could not find status.",400));
     }
 
     private User find(final Long id, final Role role) {
         return userRepository
                 .findByIdAndRole(id, role)
-                .orElseThrow(() -> new RuntimeException("Could not find" + role.getDescription() + "."));
+                .orElseThrow(() -> new MedicalClinicException("Could not find " + role.getDescription() + ".",400));
     }
 
     private Role find(final RoleEnum role) {
         return roleRepository
                 .findByDescription(role.getDescription())
-                .orElseThrow(() -> new RuntimeException("Could not find" + role.getDescription() + "role."));
+                .orElseThrow(() -> new MedicalClinicException("Could not find" + role.getDescription() + "role.",400));
     }
 
 

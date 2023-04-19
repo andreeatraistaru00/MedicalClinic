@@ -1,5 +1,6 @@
 package com.example.medical.clinic.validation;
 
+import com.example.medical.clinic.controller.request.SignupRequest;
 import com.example.medical.clinic.domain.dto.UserDto;
 import com.example.medical.clinic.exception.MedicalClinicException;
 import com.example.medical.clinic.exception.UserValidationError;
@@ -18,7 +19,7 @@ public class PatientValidator implements Validator {
 
     private final Utils utils;
     @Override
-    public void validate(UserDto userDto) {
+    public void validate(SignupRequest userDto) {
         if(Objects.isNull(userDto.getEmail()) || Strings.isEmpty(userDto.getEmail())){
             throw new MedicalClinicException(UserValidationError.EMPTY_EMAIL.getMessage()
                     ,UserValidationError.EMPTY_EMAIL.getCode());
@@ -44,7 +45,7 @@ public class PatientValidator implements Validator {
                     ,UserValidationError.WRONG_FORMAT_EMAIL.getCode());
         }
         if(!utils.isValidPassword(userDto.getPassword())){
-            throw new MedicalClinicException(UserValidationError.WRONG_FORMAT_EMAIL.getMessage()
+            throw new MedicalClinicException(UserValidationError.WRONG_FORMAT_PASSWORD.getMessage()
                     ,UserValidationError.WRONG_FORMAT_PASSWORD.getCode());
         }
     }

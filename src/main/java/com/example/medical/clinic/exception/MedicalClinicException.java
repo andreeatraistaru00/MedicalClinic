@@ -11,7 +11,7 @@ public class MedicalClinicException extends RuntimeException{
     private String message;
 
     public MedicalClinicException(String message, Integer code) {
-        super(message);
+        this.message = message;
         this.code = code;
     }
 }

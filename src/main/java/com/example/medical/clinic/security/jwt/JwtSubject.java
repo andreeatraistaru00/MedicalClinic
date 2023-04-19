@@ -1,9 +1,11 @@
 package com.example.medical.clinic.security.jwt;
 
 import com.example.medical.clinic.domain.Role;
+import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.gson.GsonBuilderCustomizer;
 
 
 @Getter
@@ -17,6 +19,7 @@ public class JwtSubject {
 
     @Override
     public String toString() {
-        return "username: "+this.getUsername() + " " + " role: "+ role.getDescription();
+        var json = new Gson();
+        return json.toJson(this);
     }
 }

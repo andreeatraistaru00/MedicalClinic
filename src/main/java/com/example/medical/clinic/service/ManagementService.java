@@ -13,7 +13,7 @@ public interface ManagementService {
 
     AppointmentDTO updateAppointment(UpdateAppointmentRequest updateAppointmentRequest);
 
-    MessageDTO deleteAppointment(Long id);
+    MessageDTO deleteAppointment(Long id, Long userId);
 
     List<AppointmentDTO> getUserAppointments(Long userId);
 }

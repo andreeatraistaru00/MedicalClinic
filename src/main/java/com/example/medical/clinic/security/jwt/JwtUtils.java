@@ -2,6 +2,7 @@ package com.example.medical.clinic.security.jwt;
 
 import com.example.medical.clinic.repository.UserRepository;
 import com.example.medical.clinic.security.services.UserDetailsImpl;
+import com.google.gson.Gson;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,8 +39,8 @@ public class JwtUtils {
                 .compact();
     }
 
-    public String getUserNameFromJwtToken(String token) {
-        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+    public JwtSubject getUserNameFromJwtToken(String token) {
+        return new Gson().fromJson(Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject(),JwtSubject.class);
     }
 
     public boolean validateJwtToken(String authToken) {

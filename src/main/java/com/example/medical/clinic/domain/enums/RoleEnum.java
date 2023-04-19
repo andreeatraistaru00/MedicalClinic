@@ -2,8 +2,8 @@ package com.example.medical.clinic.domain.enums;
 
 public enum RoleEnum {
 
-    MEDIC("medic"),
-    PACIENT("pacient");
+    MEDIC("ROLE_MEDIC"),
+    PACIENT("ROLE_PACIENT");
 
     private final String description;
 

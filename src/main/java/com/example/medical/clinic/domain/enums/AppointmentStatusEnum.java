@@ -1,25 +1,17 @@
 package com.example.medical.clinic.domain.enums;
 
-public enum AppointmentStatusEnum {
-    APPROVED("approved",1),
-    PENDING("pending",2),
-    REJECTED("rejected",3),
-    CANCELED("canceled",4);
+import lombok.Getter;
 
-    AppointmentStatusEnum(String description, Integer id) {
-        this.description = description;
-        this.id = id;
-    }
+@Getter
+public enum AppointmentStatusEnum {
+    APPROVED("APPROVED"),
+    PENDING("PENDING"),
+    REJECTED("REJECTED");
 
     private String description;
-    private Integer id;
 
 
-    public Integer getId() {
-        return id;
-    }
-
-    public String getDescription() {
-        return description;
+    AppointmentStatusEnum(String description) {
+        this.description = description;
     }
 }

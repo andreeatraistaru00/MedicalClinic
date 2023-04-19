@@ -67,7 +67,7 @@ public class User implements Serializable {
     private Date createdDate;
 
     @Getter
-    @Column(name = "last_updated_date")
+    @Column(name = "last_modified_date")
     private Date lastUpdate;
 
     public String getFullName() {

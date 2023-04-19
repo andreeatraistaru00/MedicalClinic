@@ -27,6 +27,7 @@ public class MedicalClinicApplication {
 		return web -> web.ignoring().requestMatchers(
 				new AntPathRequestMatcher("/management/**"),
 				new AntPathRequestMatcher("/v2/api-docs"),
+				new AntPathRequestMatcher("/api-docs/**"),
 				new AntPathRequestMatcher("/configuration/**"),
 				new AntPathRequestMatcher( "/swagger*/**"),
 				new AntPathRequestMatcher("/webjars/**")

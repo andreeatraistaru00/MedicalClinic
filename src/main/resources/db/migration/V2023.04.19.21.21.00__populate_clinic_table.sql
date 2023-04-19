@@ -1,0 +1,10 @@
+INSERT INTO clinic (description) VALUES ('ABC Medical Center');
+INSERT INTO clinic (description) VALUES ('Family Care Clinic');
+INSERT INTO clinic (description) VALUES ('Metro Health Clinic');
+INSERT INTO clinic (description) VALUES ('City Clinic');
+INSERT INTO clinic (description) VALUES ('Wellness Center');
+INSERT INTO clinic (description) VALUES ('MediClinic');
+INSERT INTO clinic (description) VALUES ('Healthy Living Medical Center');
+INSERT INTO clinic (description) VALUES ('New Horizons Medical Clinic');
+INSERT INTO clinic (description) VALUES ('Life Care Clinic');
+INSERT INTO clinic (description) VALUES ('Greenfield Medical Clinic');

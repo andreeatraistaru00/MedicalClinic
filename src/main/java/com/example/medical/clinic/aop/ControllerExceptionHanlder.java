@@ -18,8 +18,7 @@ public class ControllerExceptionHanlder extends ResponseEntityExceptionHandler {
         protected ResponseEntity<Object> handleConflict(
                 MedicalClinicException ex, WebRequest request) {
             var bodyOfResponse = new ValidationResponse(ex.getMessage());
-            return handleExceptionInternal(ex, bodyOfResponse,
-                    new HttpHeaders(), HttpStatus.valueOf(ex.getCode()), request);
+            return ResponseEntity.status(ex.getCode()).body(bodyOfResponse);
         }
 
 }

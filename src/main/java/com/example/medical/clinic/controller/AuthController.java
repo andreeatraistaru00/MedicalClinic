@@ -1,6 +1,7 @@
 package com.example.medical.clinic.controller;
 
 import com.example.medical.clinic.controller.request.LoginRequest;
+import com.example.medical.clinic.controller.request.SignupRequest;
 import com.example.medical.clinic.controller.response.JwtResponse;
 import com.example.medical.clinic.domain.dto.UserDto;
 import com.example.medical.clinic.security.jwt.JwtUtils;
@@ -52,7 +53,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> createBackOfficeUser(@Valid @RequestBody UserDto userDto) {
+    public ResponseEntity<?> createBackOfficeUser(@Valid @RequestBody SignupRequest userDto) {
         var response = userService.saveUser(userDto);
         return ResponseEntity.ok(response);
     }
