@@ -1,8 +1,11 @@
 package com.example.medical.clinic.utils;
 
 
+import org.springframework.stereotype.Component;
+
 import java.util.regex.Pattern;
 
+@Component
 public class Utils {
 
     public boolean isValidPassword(String password)

@@ -43,10 +43,14 @@ public class User implements Serializable {
     private String lastName;
 
     @Getter
-    @Column(name = "role_id")
-    @JoinColumn(name = "id")
+    @JoinColumn(referencedColumnName = "id",name = "role_id")
     @OneToOne(targetEntity = Role.class)
     private Role role;
+
+    @Getter
+    @JoinColumn(referencedColumnName = "id",name = "speciality_id")
+    @OneToOne(targetEntity = Speciality.class)
+    private Speciality speciality;
 
 
     @Setter
@@ -66,5 +70,20 @@ public class User implements Serializable {
     @Column(name = "last_updated_date")
     private Date lastUpdate;
 
+    public String getFullName() {
+        return lastName + " " + firstName;
+    }
 
+
+    public User(String username, String email, String password, String firstName, String lastName, Role role,  Date createdDate, Date lastUpdate) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+        this.speciality = speciality;
+        this.createdDate = createdDate;
+        this.lastUpdate = lastUpdate;
+    }
 }

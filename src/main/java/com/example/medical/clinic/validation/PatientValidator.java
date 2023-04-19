@@ -1,7 +1,6 @@
 package com.example.medical.clinic.validation;
 
 import com.example.medical.clinic.domain.dto.UserDto;
-import com.example.medical.clinic.domain.enums.ERoles;
 import com.example.medical.clinic.exception.MedicalClinicException;
 import com.example.medical.clinic.exception.UserValidationError;
 import com.example.medical.clinic.utils.Utils;

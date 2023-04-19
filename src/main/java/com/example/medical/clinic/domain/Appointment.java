@@ -3,6 +3,7 @@ package com.example.medical.clinic.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -27,40 +28,32 @@ public class Appointment implements Serializable {
     @Setter
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name = "id", nullable = false)
-    private User user;
+    @JoinColumn(referencedColumnName = "id",name = "pacient_id")
+    private User pacient;
 
     @Getter
     @Setter
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(referencedColumnName = "id",name = "medic_id")
     private User medic;
 
 
     @Getter
+    @Setter
     @Column(name = "date")
-    @NotBlank
+    @NotNull
     private LocalDate date;
 
     @Getter
-    @Column(name = "hour")
-    @NotBlank
-    private LocalTime hour;
-
-    @Getter
-    @Column(name = "type")
-    @Size(max = 50)
-    private String type;
-
-    @Getter
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(referencedColumnName = "id",name = "speciality_id")
-    private Speciality specialty;
+    @Setter
+    @Column(name = "time")
+    @NotNull
+    private LocalTime time;
 
 
     @Getter
+    @Setter
     @ManyToOne
     @JsonBackReference
     @JoinColumn(referencedColumnName = "id",name = "clinic_id")

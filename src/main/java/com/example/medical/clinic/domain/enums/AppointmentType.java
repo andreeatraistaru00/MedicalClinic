@@ -1,9 +1,9 @@
 package com.example.medical.clinic.domain.enums;
 
 public enum AppointmentType {
-   CONSULTATION("CONSULTATION"),
-   INTERVENTION("INTERVENTION"),
-   EMERGENCY("EMERGENCY");
+    CONSULTATION("CONSULTATION"),
+    INTERVENTION("INTERVENTION"),
+    EMERGENCY("EMERGENCY");
 
 
 
