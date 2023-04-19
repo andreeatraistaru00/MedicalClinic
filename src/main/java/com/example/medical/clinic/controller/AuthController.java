@@ -52,7 +52,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> createBackOfficeUser( @Valid @RequestBody UserDto userDto) {
+    public ResponseEntity<?> createBackOfficeUser(@Valid @RequestBody UserDto userDto) {
         var response = userService.saveUser(userDto);
         return ResponseEntity.ok(response);
     }

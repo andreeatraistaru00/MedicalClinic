@@ -5,8 +5,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 @ToString
@@ -30,6 +33,5 @@ public class AppointmentStatus implements Serializable {
     @Size(max=10)
     @Column(name = "description")
     private String description;
-
 
 }

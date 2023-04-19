@@ -2,6 +2,7 @@ package com.example.medical.clinic.domain.dto;
 
 import com.example.medical.clinic.domain.Clinic;
 import com.example.medical.clinic.domain.Role;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -30,6 +31,7 @@ public class UserDto {
 
     private final Role role;
 
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private final Date createdDate;
 
 
