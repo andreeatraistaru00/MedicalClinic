@@ -27,14 +27,16 @@ public class ManagementController {
     @PostMapping(path = "/create-appointment")
     @PreAuthorize("hasRole('ROLE_PACIENT')")
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody final CreateAppointmentRequest createAppointmentRequest){
-        AppointmentDTO response = managementService.createAppointment(createAppointmentRequest);
+        var pacientId = userService.getAuthenticatedUserId();
+        AppointmentDTO response = managementService.createAppointment(createAppointmentRequest, pacientId);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping(path = "/update-appointment")
     @PreAuthorize("hasRole('ROLE_MEDIC')")
     public ResponseEntity<AppointmentDTO> updateAppointment(@RequestBody final UpdateAppointmentRequest updateAppointmentRequest){
-        AppointmentDTO response = managementService.updateAppointment(updateAppointmentRequest);
+        var pacientId = userService.getAuthenticatedUserId();
+        AppointmentDTO response = managementService.updateAppointment(updateAppointmentRequest, pacientId);
         return ResponseEntity.ok(response);
     }
 

@@ -9,7 +9,6 @@ import org.hibernate.annotations.Immutable;
 @Immutable
 public class CreateAppointmentRequest {
 
-    private Long pacientId;
     private Long medicId;
     private Long clinicId;
     private String summary;

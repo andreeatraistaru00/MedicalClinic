@@ -14,7 +14,7 @@ public class OpenApiConfig {
     public OpenAPI usersMicroserviceOpenAPI() {
         return new OpenAPI()
                 .info(new Info().title("Medical Clinic")
-                        .description("Your API Description")
+                        .description("Manage your medical appointments through this API")
                         .version("2.0")).components(
                         new Components().addSecuritySchemes(
                                 "api",

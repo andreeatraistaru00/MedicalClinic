@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface ManagementService {
 
-    AppointmentDTO createAppointment(final CreateAppointmentRequest createAppointmentRequest);
+    AppointmentDTO createAppointment(final CreateAppointmentRequest createAppointmentRequest, Long pacientId);
 
-    AppointmentDTO updateAppointment(UpdateAppointmentRequest updateAppointmentRequest);
+    AppointmentDTO updateAppointment(UpdateAppointmentRequest updateAppointmentRequest, Long userId);
 
     MessageDTO deleteAppointment(Long id, Long userId);
 

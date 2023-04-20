@@ -30,11 +30,11 @@ public class ManagementServiceImpl implements ManagementService {
     private final ClinicRepository clinicRepository;
     private final AppointmentRepository appointmentRepository;
 
-    public AppointmentDTO createAppointment(final CreateAppointmentRequest createAppointmentRequest) {
+    public AppointmentDTO createAppointment(final CreateAppointmentRequest createAppointmentRequest, final Long userId) {
         final Role medicRole = find(RoleEnum.MEDIC);
         final Role pacientRole = find(RoleEnum.PACIENT);
         final User medic = find(createAppointmentRequest.getMedicId(), medicRole);
-        final User pacient = find(createAppointmentRequest.getPacientId(), pacientRole);
+        final User pacient = find(userId, pacientRole);
         final AppointmentStatus status = find(AppointmentStatusEnum.PENDING);
         final Clinic clinic = find(createAppointmentRequest.getClinicId());
         Appointment appointment = new Appointment();
@@ -49,9 +49,11 @@ public class ManagementServiceImpl implements ManagementService {
     }
 
     @Override
-    public AppointmentDTO updateAppointment(final UpdateAppointmentRequest updateAppointmentRequest) {
-       Appointment appointment = findAppointment(updateAppointmentRequest.getAppointmentId());
-       AppointmentStatus status = find(updateAppointmentRequest.getStatus());
+    public AppointmentDTO updateAppointment(final UpdateAppointmentRequest updateAppointmentRequest, final Long userId) {
+        var pacient = userRepository.findById(userId);
+       Appointment appointment;
+        appointment = appointmentRepository.findAppointmentByIdAndMedic(updateAppointmentRequest.getAppointmentId(), pacient.get());
+        AppointmentStatus status = find(updateAppointmentRequest.getStatus());
        appointment.setAppointmentStatus(status);
        return AppointmentDTO.of(appointmentRepository.save(appointment));
     }
