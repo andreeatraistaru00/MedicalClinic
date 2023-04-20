@@ -4,6 +4,7 @@ import com.example.medical.clinic.controller.request.SignupRequest;
 import com.example.medical.clinic.domain.dto.UserDto;
 import com.example.medical.clinic.exception.MedicalClinicException;
 import com.example.medical.clinic.exception.UserValidationError;
+import com.example.medical.clinic.repository.UserRepository;
 import com.example.medical.clinic.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -18,8 +19,17 @@ import java.util.Objects;
 public class PatientValidator implements Validator {
 
     private final Utils utils;
+    private final UserRepository userRepository;
     @Override
     public void validate(SignupRequest userDto) {
+        if (userRepository.existsByUsername(userDto.getUsername())) {
+            throw new MedicalClinicException(UserValidationError.EXISTING_USERNAME.getMessage()
+                    ,UserValidationError.EXISTING_USERNAME.getCode());
+        }
+        if (userRepository.existsByEmail(userDto.getEmail())) {
+            throw new MedicalClinicException(UserValidationError.EXISTING_EMAIL.getMessage()
+                    ,UserValidationError.EXISTING_EMAIL.getCode());
+        }
         if(Objects.isNull(userDto.getEmail()) || Strings.isEmpty(userDto.getEmail())){
             throw new MedicalClinicException(UserValidationError.EMPTY_EMAIL.getMessage()
                     ,UserValidationError.EMPTY_EMAIL.getCode());

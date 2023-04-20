@@ -10,9 +10,9 @@ public enum UserValidationError {
     EMPTY_FIRST_NAME(400,"First Name can't be empty"),
     EMPTY_LAST_NAME(400,"Last Name can't be empty"),
     WRONG_FORMAT_EMAIL(400,"Wrong Email format"),
-    WRONG_FORMAT_PASSWORD(400,"Wrong Password Format!");
-
-
+    WRONG_FORMAT_PASSWORD(400,"Wrong Password Format!"),
+    EXISTING_USERNAME(400,"Error: Username is already taken!"),
+    EXISTING_EMAIL(400,"Error: Email is already taken!");
 
 
     UserValidationError(Integer code, String message) {
